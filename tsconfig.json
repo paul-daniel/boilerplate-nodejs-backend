@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "target": "ES6",
+    "lib": ["ES2018","DOM"],
+    "outDir": "./dist",                                  
+    "allowSyntheticDefaultImports": true,           
+    "esModuleInterop": true,                            
+    "forceConsistentCasingInFileNames": true,            
+    "strict": true,                                     
+    "noImplicitAny": true,                            
+    "skipLibCheck": true,                                 
+  },
+  "exclude": ["node_modules", "./dist", "./spec"],
+  "include": ["src/**/*.ts"]
+}
