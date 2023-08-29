@@ -8,14 +8,16 @@ export interface Test {
 
 export class TestRepository {
   async findAll() : Promise<Test[]> {
+    const conn = await client.connect()
     try {
-      const conn = await client.connect()
       const sql = 'SELECT * FROM test'
-      const result = await conn.query(sql)
+      const result = await conn.query<Test>(sql)
       conn.release()
       return result.rows
     } catch (error) {
       throw new Error(`unable to fetch all tests : ${error}`)
+    } finally {
+      conn.release()
     }
   }
 }
