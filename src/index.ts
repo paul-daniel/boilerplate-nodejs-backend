@@ -27,8 +27,9 @@ app.get('/', (req : express.Request, res : express.Response) => {
   res.send('hello world')
 })
 
-testRoutes(app)
 userRoutes(app)
+testRoutes(app)
+
 
 app.listen(port, () => {
   console.log(`Server listening on port localhost:${port}`)
