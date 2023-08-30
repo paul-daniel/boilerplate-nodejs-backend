@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import testRoutes from './handlers/test'
 import cors from 'cors'
 import helmet from 'helmet'
+import userRoutes from './handlers/user'
 
 dotenv.config()
 
@@ -27,6 +28,7 @@ app.get('/', (req : express.Request, res : express.Response) => {
 })
 
 testRoutes(app)
+userRoutes(app)
 
 app.listen(port, () => {
   console.log(`Server listening on port localhost:${port}`)

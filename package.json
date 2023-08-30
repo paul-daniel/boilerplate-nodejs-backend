@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc --build",
     "test": "cross-env MODE=test ts-node -T node_modules/jasmine/bin/jasmine",
-    "before:test": "db-migrate db:create training_test || db-migrate up --env test",
+    "before:test": "db-migrate db:create training_test & db-migrate up --env test",
     "test:win:watch": "cross-env MODE=test nodemon --watch \"src/**/*.ts\" --exec \"ts-node -T node_modules/jasmine/bin/jasmine\"",
     "after:test": "db-migrate db:drop training_test",
     "test:lin:watch": "cross-env MODE=test nodemon --watch 'src/**/*.ts' --exec 'ts-node -T node_modules/jasmine/bin/jasmine'",
@@ -23,6 +23,7 @@
   "keywords": [],
   "license": "MIT",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/csvtojson": "^2.0.0",
     "@types/express": "^4.17.17",
@@ -47,6 +48,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
     "db-migrate": "^0.11.13",

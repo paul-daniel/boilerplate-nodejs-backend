@@ -17,6 +17,7 @@ const findById = async (req : Request, res : Response) => {
     const {id} = req.params
     if (!id) return res.status(400).send('id is required')
     const test = await testRepository.findById(Number(id))
+    if (!test) return res.status(404).send('test not found')
     res.status(200).json(test)
   } catch (error : unknown) {
     res.status(500).send(error)
@@ -45,6 +46,7 @@ const update = async (req : Request, res : Response) => {
     if (!age) return res.status(400).send('age is required')
     const newTest : Test = {id: Number(id), name, age}
     const test = await testRepository.update(newTest)
+    if (!test) return res.status(404).send('test not found')
     res.status(200).json(test)
   } catch (error) {
     res.status(500).send(error)
