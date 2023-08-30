@@ -2,6 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
 import testRoutes from './handlers/test'
+import cors from 'cors'
+import helmet from 'helmet'
 
 dotenv.config()
 
@@ -15,14 +17,16 @@ if (process.env.MODE === 'test') {
 }
 
 app.use(morgan('dev'))
-app.use(express.json());
+app.use(helmet())
+app.use(cors())
+app.use(express.json())
+
 
 app.get('/', (req : express.Request, res : express.Response) => {
   res.send('hello world')
 })
 
 testRoutes(app)
-
 
 app.listen(port, () => {
   console.log(`Server listening on port localhost:${port}`)

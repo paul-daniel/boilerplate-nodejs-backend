@@ -8,7 +8,7 @@ const findAll = async (_req : Request, res : Response) => {
     const allTests = await testRepository.findAll()
     res.status(200).json(allTests)
   } catch (error) {
-    res.status(400).send(error)
+    res.status(500).send(error)
   }
 }
 
@@ -18,8 +18,8 @@ const findById = async (req : Request, res : Response) => {
     if (!id) return res.status(400).send('id is required')
     const test = await testRepository.findById(Number(id))
     res.status(200).json(test)
-  } catch (error) {
-    res.status(400).send(error)
+  } catch (error : unknown) {
+    res.status(500).send(error)
   }
 }
 
@@ -32,7 +32,7 @@ const create = async (req : Request, res : Response) => {
     const test = await testRepository.create(newTest)
     res.status(200).json(test)
   } catch (error) {
-    res.status(400).send(error)
+    res.status(500).send(error)
   }
 }
 
@@ -47,7 +47,7 @@ const update = async (req : Request, res : Response) => {
     const test = await testRepository.update(newTest)
     res.status(200).json(test)
   } catch (error) {
-    res.status(400).send(error)
+    res.status(500).send(error)
   }
 }
 
