@@ -3,6 +3,15 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+export const config = {
+  host: process.env.DB_HOST,
+  database: process.env.MODE === 'test' ?
+  process.env.TEST_DB_DATABASE : process.env.DB_DATABASE,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  port: Number(process.env.DB_PORT),
+} as PoolConfig
+
 const client = new Pool({
   host: process.env.DB_HOST,
   database: process.env.MODE === 'test' ?
