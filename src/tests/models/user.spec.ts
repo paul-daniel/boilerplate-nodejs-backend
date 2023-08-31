@@ -1,4 +1,8 @@
+import bcrypt from 'bcrypt'
+import dotenv from 'dotenv'
 import { User, UserRepository } from '../../models/user';
+
+dotenv.config();
 
 describe('UserRepository', () => {
   const repository = new UserRepository();
@@ -15,7 +19,7 @@ describe('UserRepository', () => {
       fail('User ID is undefined, aborting tests.');
       pending();
     } else {
-      userVal = user;
+      userVal = {...user};
     }
   });
 
@@ -61,4 +65,18 @@ describe('UserRepository', () => {
     await repository.delete(userVal.id as number);
     expect(await repository.findById(userVal.id as number)).toBeUndefined();
   });
+
+  it('authenticate', async () => {
+    const authenticatedUser = await repository.authenticate(userVal.username, 'testPassword' as string);
+    const pepper = process.env.BCRYPT_PASSWORD as string;
+    expect(authenticatedUser).toBeDefined();
+  })
+
+  it('authenticate fail', async () => {
+    try {
+      await repository.authenticate(userVal.username, 'wrongPassword');
+    } catch (e) {
+      expect(e).toBeDefined(); // or whatever assertion makes sense in your case
+    }
+    })
 });
